@@ -52,6 +52,20 @@ int main(){
         ClearBackground(GREEN);
         gui(ver_color, hor_color, health);
         player(player_posx, player_posy);
+        if (IsKeyDown(KEY_RIGHT) && player_posx < 10){
+            player_posx = player_posx + 1;
+        }
+        if (IsKeyDown(KEY_LEFT) && player_posx > 1){
+            player_posx = player_posx - 1;
+        }
+        if (IsKeyDown(KEY_UP) && player_posy > 1){
+            player_posy = player_posy - 1;
+        }
+        if (IsKeyDown(KEY_DOWN) && player_posy < 10){
+            player_posy = player_posy + 1;
+        }
+        std::cout << player_posy << std::endl;
+        std::cout << player_posx << std::endl;
         EndDrawing();
     }
 }
