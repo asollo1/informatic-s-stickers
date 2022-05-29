@@ -7,7 +7,7 @@ int health = 3, player_posx = 10, player_posy = 10;
 // Functions
 
 // Rendering gui
-void gui(Color ver_color, Color hor_color, int health, Texture2D texture){
+void gui(Color ver_color, Color hor_color, int health, Texture2D texture, Texture2D heart){
     //Variables
     int count = 0;
     int position = 0;
@@ -29,22 +29,22 @@ void gui(Color ver_color, Color hor_color, int health, Texture2D texture){
     }
 
     // Hud
-    DrawRectangle(0, 810, 810, 100, BLUE);
+    DrawRectangle(0, 810, 810, 100, BLACK);
 
     // Health
     position = 50;
     while (count != health){
-        DrawCircle(position, 860,30.0f,RED);
+        DrawTexture(heart, position, 820, WHITE);
         position = position + 80;
         count = count + 1;
     }
 }
 
 // Rendering player
-void player(int player_posx, int player_posy){
+void player(int player_posx, int player_posy, Texture2D texture){
     player_posx = player_posx * 80 - 70;
     player_posy = player_posy * 80 - 70;
-    DrawRectangle(player_posx, player_posy, 70,  70, BLACK);
+    DrawTexture(texture, player_posx, player_posy, WHITE);
 }
 
 //Main code 
@@ -52,14 +52,14 @@ int main(){
     //Initialization
     InitWindow(810,900,"GAME");
     SetTargetFPS(60);
-    //Textures
-    Texture2D texture = LoadTexture("textures/grass.png");
+    //Texturesimage.png
+    Texture2D grass = LoadTexture("textures/grass.png"), player_texture = LoadTexture("textures/player.png"), heart = LoadTexture("textures/heart.png");;
     while(!WindowShouldClose()){
         BeginDrawing();
         //Rending 
         ClearBackground(GREEN);
-        gui(ver_color, hor_color, health, texture);
-        player(player_posx, player_posy);
+        gui(ver_color, hor_color, health, grass, heart);
+        player(player_posx, player_posy, player_texture);
         if (IsKeyDown(KEY_RIGHT) && player_posx < 10){
             player_posx = player_posx + 1;
         }
@@ -77,5 +77,6 @@ int main(){
         std::cout << player_posx << std::endl;
         EndDrawing();
     }
-    UnloadTexture(texture);
+    UnloadTexture(player_texture);
+    UnloadTexture(grass);
 }
