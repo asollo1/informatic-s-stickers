@@ -64,6 +64,13 @@ int main(){
         if (IsKeyDown(KEY_DOWN) && player_posy < 10){
             player_posy = player_posy + 1;
         }
+        if (IsKeyDown(KEY_B) && health != 0){
+            health = health - 1;
+        }
+        if (IsKeyDown(KEY_N) && health != 3){
+            health = health + 1;
+        }
+
         std::cout << player_posy << std::endl;
         std::cout << player_posx << std::endl;
         EndDrawing();
