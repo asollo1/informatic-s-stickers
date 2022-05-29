@@ -2,7 +2,7 @@
 #include <iostream>
 // Variables
 Color ver_color = WHITE, hor_color = WHITE;
-int health = 3, player_posx = 10, player_posy = 10;
+int health = 3, player_posx = 1, player_posy = 1, player_posx_last = 1, player_posy_last = 1;
 
 // Functions
 
@@ -32,7 +32,8 @@ void gui(Color ver_color, Color hor_color, int health, Texture2D texture, Textur
     DrawRectangle(0, 810, 810, 100, BLACK);
 
     // Health
-    position = 50;
+    position = 560;
+    DrawText("Health: ", 440, 830, 30, WHITE);
     while (count != health){
         DrawTexture(heart, position, 820, WHITE);
         position = position + 80;
@@ -72,7 +73,16 @@ int main(){
         if (IsKeyDown(KEY_DOWN) && player_posy < 10){
             player_posy = player_posy + 1;
         }
+        if (player_posx == 10 && player_posy == 10){
+            player_posx = player_posx_last;
+            player_posy = player_posy_last;
+            if (health != 0){
+                health = health - 1;
+            }
+        }
         //Debuging player position
+        player_posx_last = player_posx;
+        player_posy_last = player_posy;
         std::cout << player_posy << std::endl;
         std::cout << player_posx << std::endl;
         EndDrawing();
