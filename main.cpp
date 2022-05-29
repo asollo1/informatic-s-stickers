@@ -3,13 +3,17 @@
 // Variables
 Color ver_color = WHITE, hor_color = WHITE;
 int health = 3, player_posx = 10, player_posy = 10;
-void gui(Color ver_color, Color hor_color, int health){
+
+// Functions
+
+// Rendering gui
+void gui(Color ver_color, Color hor_color, int health, Texture2D texture){
     //Variables
     int count = 0;
     int position = 0;
 
     //background
-    //DrawTexture(texture, 320 - 320, 320 - 320, WHITE);
+    DrawTexture(texture, 800 - 800, 800 - 800, WHITE);
      
     //vertical
     while (position != 880){
@@ -36,21 +40,25 @@ void gui(Color ver_color, Color hor_color, int health){
     }
 }
 
+// Rendering player
 void player(int player_posx, int player_posy){
     player_posx = player_posx * 80 - 70;
     player_posy = player_posy * 80 - 70;
     DrawRectangle(player_posx, player_posy, 70,  70, BLACK);
 }
+
+//Main code 
 int main(){
-    //Textures
-    //Texture2D texture = LoadTexture("textures/grass.png");
     //Initialization
-    InitWindow(810,900,"Hello world!");
+    InitWindow(810,900,"GAME");
     SetTargetFPS(60);
+    //Textures
+    Texture2D texture = LoadTexture("textures/grass.png");
     while(!WindowShouldClose()){
         BeginDrawing();
+        //Rending 
         ClearBackground(GREEN);
-        gui(ver_color, hor_color, health);
+        gui(ver_color, hor_color, health, texture);
         player(player_posx, player_posy);
         if (IsKeyDown(KEY_RIGHT) && player_posx < 10){
             player_posx = player_posx + 1;
@@ -64,15 +72,10 @@ int main(){
         if (IsKeyDown(KEY_DOWN) && player_posy < 10){
             player_posy = player_posy + 1;
         }
-        if (IsKeyDown(KEY_B) && health != 0){
-            health = health - 1;
-        }
-        if (IsKeyDown(KEY_N) && health != 3){
-            health = health + 1;
-        }
-
+        //Debuging player position
         std::cout << player_posy << std::endl;
         std::cout << player_posx << std::endl;
         EndDrawing();
     }
+    UnloadTexture(texture);
 }
