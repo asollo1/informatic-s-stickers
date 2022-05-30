@@ -47,6 +47,13 @@ void player(int player_posx, int player_posy, Texture2D texture){
     player_posy = player_posy * 80 - 70;
     DrawTexture(texture, player_posx, player_posy, WHITE);
 }
+// Rendering wall
+void wall(int wall_posx, int wall_posy, Texture2D texture){
+    wall_posx = wall_posx * 80 - 70;
+    wall_posy = wall_posy * 80 - 70;
+    DrawTexture(texture, wall_posx, wall_posy, WHITE);
+}
+
 
 //Main code 
 int main(){
@@ -54,7 +61,7 @@ int main(){
     InitWindow(810,900,"GAME");
     SetTargetFPS(60);
     //Texturesimage.png
-    Texture2D grass = LoadTexture("textures/grass.png"), player_texture = LoadTexture("textures/player.png"), heart = LoadTexture("textures/heart.png");;
+    Texture2D grass = LoadTexture("textures/grass.png"), player_texture = LoadTexture("textures/player.png"), heart = LoadTexture("textures/heart.png"), wall_texture = LoadTexture("textures/wall.png");
     while(!WindowShouldClose()){
         BeginDrawing();
         //Rending 
@@ -80,6 +87,16 @@ int main(){
                 health = health - 1;
             }
         }
+        wall(2, 1, wall_texture);
+        wall(3, 1, wall_texture);
+        wall(4, 1, wall_texture);
+        wall(5, 1, wall_texture);
+        wall(6, 1, wall_texture);
+        wall(7, 1, wall_texture);
+        wall(8, 1, wall_texture);
+        wall(9, 1, wall_texture);
+        wall(10, 1, wall_texture);
+        wall(10, 10, wall_texture);
         //Debuging player position
         player_posx_last = player_posx;
         player_posy_last = player_posy;
