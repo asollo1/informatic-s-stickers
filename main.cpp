@@ -2,7 +2,7 @@
 #include <iostream>
 // Variables
 Color ver_color = WHITE, hor_color = WHITE;
-int health = 3, player_posx = 1, player_posy = 1, player_posx_last = 1, player_posy_last = 1;
+int health = 3, player_posx = 1, player_posy = 1, player_posx_last = 1, player_posy_last = 1, tick = 0, block1_posx = 1, block1_posy = 1;
 
 // Functions
 
@@ -97,9 +97,22 @@ int main(){
         wall(9, 1, wall_texture);
         wall(10, 1, wall_texture);
         wall(10, 10, wall_texture);
+        player(block1_posx , 2, player_texture);
+        //Tick system
+        tick = tick + 1;
+        if (tick == 30 or tick == 60){
+            block1_posx = block1_posx - 1;
+            if (block1_posx == 0){
+                block1_posx = 10;
+            }
+        }
+        if (tick == 60) {
+            tick = 0;
+        }
         //Debuging player position
         player_posx_last = player_posx;
         player_posy_last = player_posy;
+        std::cout << tick << std::endl;
         std::cout << player_posy << std::endl;
         std::cout << player_posx << std::endl;
         EndDrawing();
